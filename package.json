@@ -1,0 +1,23 @@
+{
+  "name": "connect-core",
+  "version": "1.0.0",
+  "description": "A node.js RESTful API that allows atheletes to connect to Universities and couches",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "Japhet Ndemera",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.7",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}
