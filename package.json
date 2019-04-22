@@ -1,5 +1,5 @@
 {
-  "name": "connect-core",
+  "name": "node-starter-api",
   "version": "1.0.0",
   "description": "A node.js RESTful API that allows atheletes to connect to Universities and couches",
   "main": "index.js",
