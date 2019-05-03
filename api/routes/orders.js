@@ -4,7 +4,32 @@ const router = express.Router();
 /*
   TODO: 1) create model for order
 */
+
+
 router.get('/', (request, response, next) => {
+  console.log('HERE!!!!!!!!!!!!!!!!!!!');
+  const cart = [
+    {
+      name: "iPhone xs",
+      price: "1500"
+    },
+    {
+      name: "Google PixelBook",
+      price: "500"
+    }
+  ];
+
+//   var myData = [];
+//   const cart = [
+//   $.each(cart ,function (index) {
+//     var obj = { 
+//         id: $this.find('.elementOne').val(),
+//         name: $this.find('.elementTwo').text()
+//     };
+//     myData.push(obj);
+// })
+
+console.log(myData);
   response.status(200).json({
     message: 'Handling Order GET Requests'
   });

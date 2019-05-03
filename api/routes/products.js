@@ -12,7 +12,7 @@ router.get('/', (request, response, next) => {
         console.log("MY RES", result);
         response.status(200).json({
           message: 'Product was found',
-          error: result
+          data: result
         });
       } else {
         //not found so return 404
@@ -36,10 +36,21 @@ router.post('/', (request, response, next) => {
   const product = new Product({
     _id: new mongoose.Types.ObjectId(),
     name: request.body.name,
-    price: request.body.price
-  });
-  //TODO add validation and return 400 if it fails
+    price: request.body.price,
+    image: request.body.image,
+    category: request.body.category
 
+  });
+
+  if(!(product.name && product.price)){
+    response.status(500).json({
+      message: 'Product was unable to be created, missing fields'
+    });
+  }
+
+  
+  //TODO add validation and return 400 if it fails
+  console.log('PRICE', product.price);
   //save the incoming data
   product.save()
     .then(result => {
@@ -72,7 +83,7 @@ router.get('/:productId', (request, response, next) => {
         console.log("MY RES", result);
         response.status(200).json({
           message: 'Product was found',
-          error: result
+          data: result
         });
       } else {
         //not found so return 404
