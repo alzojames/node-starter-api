@@ -6,6 +6,6 @@ const orderSchema = mongoose.Schema({
   price: Number
 });
 
-module.exports = mongoose.model('Product', productSchema);
+module.exports = mongoose.model('Order', orderSchema);
 
 //5c4faa138d9e2f528888d230
