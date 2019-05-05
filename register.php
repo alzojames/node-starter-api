@@ -1,7 +1,7 @@
 <?php
-    session_start(); //Starts session.
-
-    ?>
+    session_start();
+    include('navbar.php');
+?>
 
 <!DOCTYPE html>
 <html lang="en">

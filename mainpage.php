@@ -1,6 +1,6 @@
 <?php
     session_start();//starts session.
-    // include();// TODO: include navbar 
+    include('navbar.php');
     // include();//TODO: inlcude database file db_Cconnect
 ?>
 

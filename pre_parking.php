@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    include('navbar.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,10 +10,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="CSS/pre_parking.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 
 <body>
+    
     <h1>Parking</h1>
+
 
     <div>
         <form action="POST">
@@ -25,7 +32,7 @@
             </select><br>
             Return Date & Time:<input type="date" name="returning_date">
             <select name="" id="">
-            <?php
+                <?php
                 $start_Time = strtotime('00:00');//Starts the time @ 12:00 AM
                 $end_Time = strtotime('23:00');// Ends the time @ 11:00 PM
                 for ($i=$start_Time; $i<=$end_Time ; $i=$i + 30*60) { //increments time by 30 minutes
@@ -33,7 +40,7 @@
                 }
                 ?>
             </select>
-            <input type="submit" value= "Checkout"name="" id="">
+            <input type="submit" value="Checkout" name="" id="">
         </form>
     </div>
 </body>
