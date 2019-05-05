@@ -33,7 +33,7 @@
                 }
                 ?>
             </select>
-            <input type="submit" value= "cart"name="" id="">
+            <input type="submit" value= "Checkout"name="" id="">
         </form>
     </div>
 </body>
