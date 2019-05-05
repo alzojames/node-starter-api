@@ -1,21 +1,23 @@
-#pic img {
-    block-size: 50%;
-   width: 50%;
-    text-align: center;
-    position: relative;
-    position: inherit;
-    float: left;
-    /* max-height: 50%; */
-    display: inline-block;
-
-}
 
 body {
     background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
 }
 
 #pic img:hover {
     opacity: .5;
     position: relative;
-    
 }
+
+#pic{
+    position: relative;
+    text-align: center;
+    display: inline-block;
+    float: left;
+    width: 100px;
+}
+img {
+
+    image-rendering: crisp-edges;
+  }

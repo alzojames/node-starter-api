@@ -21,8 +21,8 @@
         </a>
 
         <!-- TODO: add other part of website -->
-        <!-- <a href="placeholder.txt">
-            <img src="images/parking2.jpg"> -->
+        <a href="placeholder.txt">
+            <img src="images/parking2.jpg">
         </a>
     </div>
 </body>
