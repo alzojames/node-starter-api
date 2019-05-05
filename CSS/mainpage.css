@@ -1,0 +1,21 @@
+#pic img {
+    block-size: 50%;
+   width: 50%;
+    text-align: center;
+    position: relative;
+    position: inherit;
+    float: left;
+    /* max-height: 50%; */
+    display: inline-block;
+
+}
+
+body {
+    background-color: blue;
+}
+
+#pic img:hover {
+    opacity: .5;
+    position: relative;
+    
+}
