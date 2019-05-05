@@ -1,0 +1,17 @@
+.heading{
+    text-emphasis:50px ;
+    font-family: sans-serif;
+    font-weight: bold;
+
+}
+#title{
+    text-align: center;
+}
+.row{
+    margin: 0px;
+    display: block;
+}
+.textbox{
+    margin: 0px;
+    box-align: initial;
+}
