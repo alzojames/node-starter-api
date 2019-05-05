@@ -20,6 +20,9 @@
 
             <label for="password">Password</label>
             <input type="password" name="" id="">
+
+            <input type="submit" value= "login">
+
         </div>
     </body>
 </html> 
