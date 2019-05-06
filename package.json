@@ -1,7 +1,7 @@
 {
   "name": "connect-core",
   "version": "1.0.0",
-  "description": "A node.js RESTful API that allows atheletes to connect to Universities and couches",
+  "description": "A node.js RESTful API for an online store",
   "main": "index.js",
   "directories": {
     "doc": "docs"
