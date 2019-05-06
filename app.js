@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 
 const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders');
+const userRoute = require('./api/routes/users');
 
 mongoose.connect('mongodb://connect-core:' +
   process.env.MONGO_ATLAS_PW +
@@ -42,10 +43,13 @@ app.use((request, response, next) => {
 app.use('/products', productRoutes);
 app.use('/orders', orderRoutes);
 
+
+
+
 //If you get past this, the endpoint doesn't exist so we return=404
 //Or something went wrong and we return http=500
 app.use('/', (request, response, next) => {
-  const error = new Error('Not Found')
+  const error = new Error('Path Not Found')
   error.status = 404;
   next(error);
 });

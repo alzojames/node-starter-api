@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Order = require('../models/order');
+const User = require('../models/user');
 const mongoose = require('mongoose');
 /*
   TODO: 1) create model for order
@@ -111,6 +112,90 @@ router.get('/', (request, response, next) => {
         //not found so return 404
         response.status(404).json({
           message: 'Order was not found'
+        });
+      }
+    })
+    .catch(error => {
+      //catch 500 error
+      console.log(error)
+      response.status(500).json({
+        message: 'Something went wrong',
+        error: error
+      });
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+router.post('/user', (request, response, next) => {
+  //create unique id for DB and parse body from the POST
+  console.log("MAKE USER");
+  const user = new User({
+    _id: new mongoose.Types.ObjectId(),
+    email: request.body.email,
+    password: request.body.password
+
+  });
+
+  if(!(user.email && user.password)){
+    response.status(500).json({
+      message: 'User was unable to be created, missing fields'
+    });
+  }
+
+  
+  //TODO add validation and return 400 if it fails
+  console.log('Email', user.email);
+  //save the incoming data
+  user.save()
+    .then(result => {
+      //if success return 201 and object
+      console.log("NEW PRODUCT", result);
+      response.status(201).json({
+        message: 'New User created',
+        createdProduct: user
+      });
+    })
+    .catch(error => {
+      //catch 500 errors
+      console.log(error)
+      response.status(500).json({
+        message: 'User was unable to be created',
+        error: error
+      });
+    });
+});
+
+router.get('/user/:userEmail/:userPassword', (request, response, next) => {
+  //parse id from url
+  const id = request.params.email;
+  const pw = request.params.email;
+  
+  User.find({ email: id, password: pw})
+    .exec()
+    .then(result => {
+      if (result) {
+        //if found and not null return 200
+        console.log("MY RES", result);
+        response.status(200).json({
+          message: 'Product was found',
+          data: result
+        });
+      } else {
+        //not found so return 404
+        response.status(401).json({
+          message: 'Username or password was not found'
         });
       }
     })
