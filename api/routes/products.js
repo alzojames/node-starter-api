@@ -36,13 +36,12 @@ router.post('/', (request, response, next) => {
   const product = new Product({
     _id: new mongoose.Types.ObjectId(),
     name: request.body.name,
-    price: request.body.price,
-    image: request.body.image,
+    barCodeNumber: request.body.barCodeNumber,
     category: request.body.category
 
   });
 
-  if(!(product.name && product.price)){
+  if(!(product.name)){ //TODO add barCodeNumber
     response.status(500).json({
       message: 'Product was unable to be created, missing fields'
     });
@@ -50,7 +49,7 @@ router.post('/', (request, response, next) => {
 
   
   //TODO add validation and return 400 if it fails
-  console.log('PRICE', product.price);
+  console.log('Bar Code', product.barCodeNumber);
   //save the incoming data
   product.save()
     .then(result => {
@@ -109,7 +108,7 @@ router.patch('/:productId', (request, response, next) => {
 
     const newProduct = new Product({
       name: request.body.name,
-      price: request.body.price
+      barCodeNumber: request.body.barCodeNumber
     });
   Product.update({ _id: id }, { $set: newProduct})
     .exec()
