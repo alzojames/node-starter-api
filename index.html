@@ -1,97 +1,118 @@
-<!DOCTYPE HTML>   
-<html>   
-  
-<head>  
-    <title>  
-        How to convert JSON data to a 
-        html table using JavaScript ? 
-    </title> 
-      
-    <script src= 
-"https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"> 
-    </script> 
-</head>  
-  
-<body style = "text-align:center;" id = "body">   
-      
-    <h1 style = "color:green;" >   
-        GeeksForGeeks   
-    </h1> 
-      
-    <p id = "GFG_UP" style =  
-        "font-size: 15px; font-weight: bold;"> 
-    </p> 
-      
-    <button onclick = "constructTable('#table')"> 
-        click here 
-    </button> 
-      
-    <br><br> 
-      
-    <table align = "center"
-            id="table" border="1"> 
-    </table> 
-      
-    <script> 
-        var el_up = document.getElementById("GFG_UP"); 
-          
-        var list = [ 
-            { "col_1": "val_11", "col_3": "val_13" }, 
-            { "col_2": "val_22", "col_3": "val_23" }, 
-            { "col_1": "val_31", "col_3": "val_33" } 
-        ]; 
-          
-        el_up.innerHTML = "Click on the button to create " 
-                +   "the table from the JSON data.<br><br>" 
-                + JSON.stringify(list[0]) + "<br>"  
-                + JSON.stringify(list[1]) + "<br>" 
-                + JSON.stringify(list[2]);    
-              
-        function constructTable(selector) { 
-              
-            // Getting the all column names 
-            var cols = Headers(list, selector);   
-   
-            // Traversing the JSON data 
-            for (var i = 0; i < list.length; i++) { 
-                var row = $('<tr/>');    
-                for (var colIndex = 0; colIndex < cols.length; colIndex++) 
-                { 
-                    var val = list[i][cols[colIndex]]; 
-                      
-                    // If there is any key, which is matching 
-                    // with the column name 
-                    if (val == null) val = "";   
-                        row.append($('<td/>').html(val)); 
-                } 
-                  
-                // Adding each row to the table 
-                $(selector).append(row); 
-            } 
-        } 
-          
-        function Headers(list, selector) { 
-            var columns = []; 
-            var header = $('<tr/>'); 
-              
-            for (var i = 0; i < list.length; i++) { 
-                var row = list[i]; 
-                  
-                for (var k in row) { 
-                    if ($.inArray(k, columns) == -1) { 
-                        columns.push(k); 
-                          
-                        // Creating the header 
-                        header.append($('<th/>').html(k)); 
-                    } 
-                } 
-            } 
-              
-            // Appending the header to the table 
-            $(selector).append(header); 
-                return columns; 
-        }        
-    </script>  
-</body>   
-  
-</html> 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Convert JSON Data to HTML Table</title>
+    <style>
+        th, td, p, input {
+            font:14px Verdana;
+        }
+        table, th, td 
+        {
+            border: solid 1px #DDD;
+            border-collapse: collapse;
+            padding: 2px 3px;
+            text-align: center;
+        }
+        th {
+            font-weight:bold;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" onclick="CreateTableFromJSON()" value="Create Table From JSON" />
+    <p id="showData"></p>
+</body>
+
+<script>
+    
+    function httpGet(theUrl){
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+        xmlHttp.send( null );
+        return xmlHttp.responseText;
+    }
+    function CreateTableFromJSON() {
+     
+        var myBooks = [
+        {
+            "_id": "5dc82a1c1dac4b0b822369eb",
+            "name": "Sprill Notebook",
+            "category": "books",
+            "__v": 0
+        },
+        {
+            "_id": "5dc82a581dac4b0b822369ec",
+            "name": "Sprill Notebook",
+            "category": "books",
+            "__v": 0
+        },
+        {
+            "_id": "5dc82a611dac4b0b822369ed",
+            "name": "Sprill Notebook",
+            "category": "books",
+            "__v": 0
+        },
+        {
+            "_id": "5dc82a7bcc5a320bb6158239",
+            "name": "Sprill Notebook",
+            "barCodeNumber": "11-22-33",
+            "category": "books",
+            "__v": 0
+        },
+        {
+            "_id": "5dc82a9fcc5a320bb615823a",
+            "name": "Blue Pen",
+            "barCodeNumber": "12-12-33",
+            "category": "books",
+            "__v": 0
+        }
+    ]
+        
+        
+        
+        let res =  httpGet('http://100.115.92.202:4000/products/');
+        x = res.data;
+        console.log("RES: ", res);
+
+        // EXTRACT VALUE FOR HTML HEADER. 
+        // ('Book ID', 'Book Name', 'Category' and 'Price')
+        var col = [];
+        for (var i = 0; i < myBooks.length; i++) {
+            for (var key in myBooks[i]) {
+                if (col.indexOf(key) === -1) {
+                    col.push(key);
+                }
+            }
+        }
+
+        // CREATE DYNAMIC TABLE.
+        var table = document.createElement("table");
+
+        // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
+
+        var tr = table.insertRow(-1);                   // TABLE ROW.
+
+        for (var i = 0; i < col.length; i++) {
+            var th = document.createElement("th");      // TABLE HEADER.
+            th.innerHTML = col[i];
+            tr.appendChild(th);
+        }
+
+        // ADD JSON DATA TO THE TABLE AS ROWS.
+        for (var i = 0; i < myBooks.length; i++) {
+
+            tr = table.insertRow(-1);
+
+            for (var j = 0; j < col.length; j++) {
+                var tabCell = tr.insertCell(-1);
+                tabCell.innerHTML = myBooks[i][col[j]];
+            }
+        }
+
+        // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
+        var divContainer = document.getElementById("showData");
+        divContainer.innerHTML = "";
+        divContainer.appendChild(table);
+    }
+</script>
+</html>
